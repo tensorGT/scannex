@@ -1,0 +1,91 @@
+import {
+    Button, VerticalBox, HorizontalBox, LineEdit, TabWidget, StandardListView
+} from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    title: "rust_scanner // Proper Fast Windows Storage Scanner";
+    width: 1020px;
+    height: 680px;
+
+    in-out property <string> target_path: "C:\\";
+    in-out property <bool> is_detailed: false;
+    in-out property <bool> is_scanning: false;
+    in-out property <string> status_text: "Ready. Pick a folder/drive and hit Scan Now.";
+
+    in-out property <[StandardListViewItem]> category_items: [];
+    in-out property <[StandardListViewItem]> file_items: [];
+    in-out property <[StandardListViewItem]> folder_items: [];
+    in-out property <[StandardListViewItem]> ext_items: [];
+    in-out property <[StandardListViewItem]> detail_items: [];
+
+    callback start_scan(string, bool);
+
+    VerticalBox {
+        padding: 12px;
+        spacing: 8px;
+
+        HorizontalBox {
+            spacing: 8px;
+            Text {
+                text: "Path:";
+                vertical-alignment: center;
+            }
+            path_input := LineEdit {
+                text <=> root.target_path;
+                placeholder-text: "e.g. C:\\ or C:\\Users";
+            }
+            Button {
+                text: root.is_detailed ? "Mode: Detailed" : "Mode: Ultrafast";
+                clicked => {
+                    root.is_detailed = !root.is_detailed;
+                }
+            }
+            Button {
+                text: root.is_scanning ? "Scanning..." : "Scan Now";
+                enabled: !root.is_scanning;
+                clicked => {
+                    root.start_scan(root.target_path, root.is_detailed);
+                }
+            }
+        }
+
+        Text {
+            text: root.status_text;
+            color: #00aa88;
+            font-size: 13px;
+        }
+
+        TabWidget {
+            Tab {
+                title: "1. File Types";
+                StandardListView {
+                    model: root.category_items;
+                }
+            }
+            Tab {
+                title: "2. Top Files (Hi -> Lo)";
+                StandardListView {
+                    model: root.file_items;
+                }
+            }
+            Tab {
+                title: "3. Top Folders (Hi -> Lo)";
+                StandardListView {
+                    model: root.folder_items;
+                }
+            }
+            Tab {
+                title: "4. Extensions & Info";
+                StandardListView {
+                    model: root.ext_items;
+                }
+            }
+            Tab {
+                title: "5. Deep Details";
+                StandardListView {
+                    model: root.detail_items;
+                }
+            }
+        }
+    }
+}
