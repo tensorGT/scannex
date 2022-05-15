@@ -4,6 +4,8 @@ Proper fast Windows storage scanner written in Rust. Built in one week in May 20
 
 Runs as a **CLI with interactive tabs by default**, or pass `--ui` if you want the **Slint desktop GUI**. Zero prerequisites — just one standalone `.exe` you can drop anywhere and run.
 
+![rust_scanner CLI TUI](assets/cli-tui.jpg)
+
 ---
 
 ## Quick Start (No Stress)
