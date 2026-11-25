@@ -1,6 +1,6 @@
 # rust_scanner
 
-Proper fast Windows storage scanner written in Rust. Built in one week in May 2022 because I got tired of waiting 20 minutes just to see what is eating my C: drive.
+Proper fast Windows storage scanner written in Rust. Built in one week in because I got tired of waiting 20 minutes just to see what is eating my C: drive.
 
 Runs as a **CLI with interactive tabs by default**, or pass `--ui` if you want the **Slint desktop GUI**. Zero prerequisites — just one standalone `.exe` you can drop anywhere and run.
 
